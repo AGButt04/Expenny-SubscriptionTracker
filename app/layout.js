@@ -2,7 +2,7 @@ import "./globals.css";
 import "./fanta.css"
 import Head from "./Head";
 import Link from "next/link";
-import GoTo from "@/components/Goto";
+import GoTo from "@/components/GoTo";
 
 export const metadata = {
   title: "Expenny · The Subscription Tracker",
