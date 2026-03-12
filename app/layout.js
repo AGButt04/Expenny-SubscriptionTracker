@@ -26,6 +26,28 @@ export default function RootLayout({ children }) {
   const footer = (
     <footer>
       <div className="hard-line" />
+      <div className="footer-content">
+        <div>
+          <div>
+            <h4>Expenny</h4>
+            <p>|</p>
+            <button disabled>Install app</button>
+          </div>
+
+          <p className="copyright">© Copyright 2026-2027, Abdul Ghani Butt.
+            <br />All rights reserved.
+          </p>
+        </div>
+
+        <div>
+          <p>Facing issues? <a>Get help</a></p>
+          <p>Suggestion for improvement? <a>Share Feedback</a></p>
+          <div>
+            <Link href={'/privacy'}>Privacy Policy</Link>
+            <Link href={'/tos'}>Terms of Service</Link>
+          </div>
+        </div>
+      </div>
     </footer>
   )
 
