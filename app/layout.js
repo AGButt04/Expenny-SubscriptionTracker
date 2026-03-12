@@ -1,5 +1,6 @@
 import "./globals.css";
 import "./fanta.css"
+import Head from "./Head";
 
 export const metadata = {
   title: "Expenny · The Subscription Tracker",
@@ -9,6 +10,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <Head />
       <body >
         {children}
       </body>
