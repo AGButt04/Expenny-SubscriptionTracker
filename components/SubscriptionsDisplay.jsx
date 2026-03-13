@@ -34,6 +34,17 @@ export default function SubscriptionsDisplay(props) {
                                 </div>
                                 <small>per {billingFrequency}</small>
 
+                                <div className="sub-renewel">
+                                    <div>
+                                        <p>Started</p>
+                                        <h4>{startDate}</h4>
+                                    </div>
+                                    <div>
+                                        <p>Due</p>
+                                        <h4>{getDaysUntilNextCharge(startDate, billingFrequency)}</h4>
+                                    </div>
+                                </div>
+
                                 <div className="white-line" />
                                 <p>{notes}</p>
 
