@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Hero() {
     return (
         <div className="hero-section">
@@ -12,7 +14,9 @@ export default function Hero() {
 
                 </p>
                 <p className="text-medium">Measure, analyse and track your subscription with Expenny.</p>
-                <button><h5>Get started &rarr;</h5></button>
+                <Link href={'/dashboard'}>
+                    <button><h5>Get started &rarr;</h5></button>
+                </Link>
                 <small>Free to use. No credit card required.</small>
             </div>
 
