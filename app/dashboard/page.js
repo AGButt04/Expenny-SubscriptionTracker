@@ -4,7 +4,7 @@ import SubscriptionsDisplay from "@/components/SubscriptionsDisplay";
 import SubscriptionSummary from "@/components/SubsriptionSummary";
 
 export default function DashboardPage() {
-  const isAuthenicated = false;
+  const isAuthenicated = true;
   const isAddEntry = true;
 
   if (!isAuthenicated) {
