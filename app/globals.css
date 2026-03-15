@@ -260,7 +260,7 @@ section > h2 {
 section form {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1rem 2rem;
+  gap: 1rem;
 }
 
 section form label {
@@ -362,6 +362,19 @@ form textarea {
   
   .hero-section > div:first-of-type {
     max-width: 400px;
+  }
+
+  .analytics-card {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .card-container {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+
+  section form {
+    gap: 1rem 2rem;
   }
 
 }
