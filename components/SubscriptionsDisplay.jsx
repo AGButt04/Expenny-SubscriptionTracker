@@ -24,7 +24,7 @@ export default function SubscriptionsDisplay(props) {
                         <div key={subIndex} className="card subscription-card">
                             <div>
                                 <h3>{name}</h3>
-                                <div className={'status ' + (status === 'Active')? 'card-button-primary' : 'card-button-secondary'}>
+                                <div className={'status ' + (status === 'Active' ? ' card-button-primary' : ' card-button-secondary')}>
                                     <small>{status}</small>
                                 </div>
                             </div>
