@@ -18,7 +18,7 @@ export default function DashboardPage() {
       <SubscriptionSummary />
       <SubscriptionsDisplay />
       {isAddEntry && (
-        <SubscriptionForm />
+        <SubscriptionForm onSubmit={() => {}} closeInput={() => {}}/>
       )}
     </>
   );

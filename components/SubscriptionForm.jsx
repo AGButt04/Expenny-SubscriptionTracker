@@ -1,19 +1,51 @@
 'use client'
+import { useState } from "react"
 
-export default function SubscriptionForm() {
+export default function SubscriptionForm(props) {
+    const { onSubmit, closeInput } = props;
+    const [formData, setFormData] = useState({
+        name: '',
+        category: 'Web Services',
+        cost: '',
+        currency: 'USD',
+        billingFrequency: 'Monthly',
+        nextBillingDate: '',
+        paymentMethod: 'Credit Card',
+        startDate: '',
+        renewelType: '',
+        notes: '',
+        status: 'Active'
+    });
+
+    function handleFormSubmit(event) {
+        // Prevents the random s behavious of reloading the webpage
+        event.preventDefault();
+        onSubmit
+    }
+
+    function handleChangeInput(event) {
+        const newData = {
+            ...formData,
+            [event.target.name]: event.target.value
+        }
+        setFormData(newData)
+    }
+
     return (
         <section>
             <h2>Add a new subscription</h2>
-            <form onSubmit={() => { }}>
+            <form onSubmit={handleFormSubmit}>
                 <label>
                     <span>Subscription Name</span>
-                    <input type="text" name="name" placeholder="e.g. Netflix, Spotify, AWS Hosting " required />
+                    <input value={formData.value} onChange={handleChangeInput} 
+                    type="text" name="name" placeholder="e.g. Netflix, Spotify, AWS Hosting " 
+                    required />
                 </label>
 
                 <label>
                     <span>Category</span>
-                    <select name="category">
-                        {['Entertainment', 'Music', 'Software', 'Webservices', 
+                    <select value={formData.category} onChange={handleChangeInput} name="category">
+                        {['Entertainment', 'Music', 'Software', 'Web Services', 
                         'Health&fitness', 'Other'].map((cat, catIndex) => {
                             return (
                                 <option key={catIndex}>
@@ -26,12 +58,13 @@ export default function SubscriptionForm() {
 
                 <label>
                     <span>Cost</span>
-                    <input type="number" name="cost" placeholder="e.g. 12.00" step="0.01" />
+                    <input value={formData.cost} onChange={handleChangeInput} 
+                    type="number" name="cost" placeholder="e.g. 12.00" step="0.01" />
                 </label>
 
                 <label>
                     <span>Currency</span>
-                    <select name="category">
+                    <select value={formData.currency} onChange={handleChangeInput} name="currency">
                         {['USD', 'EUR', 'GBP', 'NZD', 'AUD', 'Other'].map((cur, curIndex) => {
                             return (
                                 <option key={curIndex}>{cur}</option>
@@ -42,7 +75,7 @@ export default function SubscriptionForm() {
 
                 <label>
                     <span>Billing Frequency</span>
-                    <select name="billingFrequency">
+                    <select value={formData.billingFrequency} onChange={handleChangeInput} name="billingFrequency">
                         {['Monthly', 'Yearly', 'Quarterly', 'One-time'].map((bill, billIndex) => {
                             return (
                                 <option key={billIndex}>{bill}</option>
@@ -53,7 +86,7 @@ export default function SubscriptionForm() {
 
                 <label>
                     <span>Payment Method</span>
-                    <select name="paymentMethod">
+                    <select value={formData.paymentMethod} onChange={handleChangeInput} name="paymentMethod">
                         {['Credit Card', 'Debit Card', 'PayPal', 'Bank transfer', 'Other'].map((pay, payIndex) => {
                             return (
                                 <option key={payIndex}>{pay}</option>
@@ -64,12 +97,13 @@ export default function SubscriptionForm() {
 
                 <label>
                     <span>Subscription Start Date</span>
-                    <input type="date" name="startDate" required />
+                    <input value={formData.startDate} onChange={handleChangeInput} 
+                    type="date" name="startDate" required />
                 </label>
 
                 <label>
                     <span>Status</span>
-                    <select name="status">
+                    <select value={formData.status} onChange={handleChangeInput} name="status">
                         {['Active', 'Paused', 'Cancelled'].map((stat, statIndex) => {
                             return (
                                 <option key={statIndex}>{stat}</option>
@@ -80,12 +114,13 @@ export default function SubscriptionForm() {
 
                 <label className="fat-column">
                     <span>Notes</span>
-                    <textarea name="notes" placeholder="e.g. Shared with family, includes cloud storage" />
+                    <textarea value={formData.notes} onChange={handleChangeInput} 
+                    name="notes" placeholder="e.g. Shared with family, includes cloud storage" />
 
                 </label>
                 
                 <div className="fat-column form-submit-btns">
-                    <button>Cancel</button>
+                    <button onClick={closeInput}>Cancel</button>
                     <button type="submit">
                         Add subscription
                     </button>
