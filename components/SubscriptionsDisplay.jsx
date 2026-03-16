@@ -3,7 +3,7 @@ import { getDaysUntilNextCharge, subscriptions } from "@/utils";
 
 
 export default function SubscriptionsDisplay(props) {
-    const { handleShowInput, handleEditSubscription} = props;
+    const { handleShowInput, handleEditSubscription } = props;
     // const { handleDeleteSubscription, userData} = useAuth();
     // console.log(userData);
 
