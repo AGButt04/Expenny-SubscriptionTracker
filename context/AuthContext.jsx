@@ -1,6 +1,7 @@
 'use client'
 
 import { auth, db } from "@/firebase";
+import { subscriptions } from "@/utils";
 import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import { createContext, useContext, useState, useEffect } from "react";
@@ -32,6 +33,24 @@ export function AuthProvider(props) {
         return signOut(auth);
     }
 
+    async function handleAddSubscription(newSubscription) {
+        // Modify the local state (global context)
+        const newSubscriptions = [...userData.subscriptions, newSubscription];
+        setUserData({subscriptions: newSubscriptions})
+
+        // Write the changes to out firebase database (async)
+        
+    }
+
+    async function handleDeleteSubscription(index) {
+        // DELETE the entry at that index.
+        const newSubscriptions = userData.subscriptions.filter((val, valIndex) => {
+            return valIndex != index;
+        })
+
+        setUserData({subscriptions: newSubscriptions});
+    }
+
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, async user => {
             try {
@@ -46,7 +65,7 @@ export function AuthProvider(props) {
 
                 console.log('Fetching user data..');
 
-                let firebaseData = {subscriptions: []} // Default data
+                let firebaseData = { subscriptions } // Default data
                 if (docSnap.exists()) {
                     // Found data
                     firebaseData = docSnap.data();
@@ -65,7 +84,8 @@ export function AuthProvider(props) {
     }, [])
 
     const value = {
-        currentUser, userData, loading, signup, login, logout
+        currentUser, userData, loading, signup, login, logout,
+        handleAddSubscription, handleDeleteSubscription
     }
 
     return (
