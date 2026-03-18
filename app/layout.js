@@ -3,7 +3,7 @@ import "./fanta.css"
 import Head from "./Head";
 import Link from "next/link";
 import GoTo from "@/components/GoTo";
-import { AuthProvider } from "@/components/AuthContext";
+import { AuthProvider } from "@/context/AuthContext";
 
 export const metadata = {
   title: "Expenny · The Subscription Tracker",
