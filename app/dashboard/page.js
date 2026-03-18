@@ -8,9 +8,10 @@ import SubscriptionSummary from "@/components/SubsriptionSummary";
 import { useState } from "react";
 
 export default function DashboardPage() {
-  const isAuthenicated = true;
   const [isAddEntry, setisAddEntry] = useState(false);
-  const { handleDeleteSubscription  } = useAuth();
+  const { handleDeleteSubscription, userData, currentUser, loading  } = useAuth();
+
+  const isAuthenicated = !!currentUser;
 
   const [formData, setFormData] = useState({
       name: '',
@@ -48,6 +49,10 @@ export default function DashboardPage() {
     setisAddEntry(!isAddEntry);
   }
 
+
+  if (loading) {
+    return (<p>Loading...</p>)
+  }
   if (!isAuthenicated) {
     return (
       <Login />
