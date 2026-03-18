@@ -17,7 +17,7 @@ export default function Login() {
             return;
     
         setError(null);     
-        setAuthenticating = true;   
+        setAuthenticating(true);   
         try {
             if (isRegisteration) {
                 // Register a user
@@ -28,6 +28,7 @@ export default function Login() {
             }
         } catch (err) {
             console.log(err.message);
+            setError(err.message);
         } finally {
             setAuthenticating(false);
         }
@@ -38,9 +39,9 @@ export default function Login() {
         <div className="login">
             <h2>{isRegisteration? 'Create an account' : 'Login'}</h2>
             
-            {error & (
-                <div className="card">
-                    <p>{error}</p>
+            {error && (
+                <div className="">
+                    <p> ❌ {error}</p>
                 </div>)
             }
             
