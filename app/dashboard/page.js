@@ -10,6 +10,28 @@ export default function DashboardPage() {
   const isAuthenicated = false;
   const [isAddEntry, setisAddEntry] = useState(false);
 
+  const [formData, setFormData] = useState({
+        name: '',
+        category: 'Web Services',
+        cost: '',
+        currency: 'USD',
+        billingFrequency: 'Monthly',
+        nextBillingDate: '',
+        paymentMethod: 'Credit Card',
+        startDate: '',
+        renewelType: '',
+        notes: '',
+        status: 'Active'
+    });
+
+    function handleChangeInput(event) {
+        const newData = {
+            ...formData,
+            [event.target.name]: event.target.value
+        }
+        setFormData(newData)
+    }
+
   function handleToggleInput() {
     setisAddEntry(!isAddEntry);
   }
@@ -25,7 +47,8 @@ export default function DashboardPage() {
       <SubscriptionSummary />
       <SubscriptionsDisplay handleShowInput={isAddEntry? () => {} : handleToggleInput}/>
       {isAddEntry && (
-        <SubscriptionForm onSubmit={() => {}} closeInput={handleToggleInput}/>
+        <SubscriptionForm onSubmit={() => {}} 
+        closeInput={handleToggleInput} formData={formData} handleChangeInput={handleChangeInput}/>
       )}
     </>
   );
