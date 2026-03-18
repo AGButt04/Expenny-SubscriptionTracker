@@ -7,13 +7,7 @@ import SubscriptionsDisplay from "@/components/SubscriptionsDisplay";
 import SubscriptionSummary from "@/components/SubsriptionSummary";
 import { useState } from "react";
 
-export default function DashboardPage() {
-  const [isAddEntry, setisAddEntry] = useState(false);
-  const { handleDeleteSubscription, userData, currentUser, loading  } = useAuth();
-
-  const isAuthenicated = !!currentUser;
-
-  const [formData, setFormData] = useState({
+const blankSubscription = {
       name: '',
       category: 'Web Services',
       cost: '',
@@ -25,7 +19,15 @@ export default function DashboardPage() {
       renewelType: '',
       notes: '',
       status: 'Active'
-  });
+  };
+
+export default function DashboardPage() {
+  const [isAddEntry, setisAddEntry] = useState(false);
+  const { handleDeleteSubscription, userData, currentUser, loading  } = useAuth();
+
+  const isAuthenicated = !!currentUser;
+
+  const [formData, setFormData] = useState(blankSubscription);
  
   function handleChangeInput(event) {
       const newData = {
@@ -45,6 +47,10 @@ export default function DashboardPage() {
     setisAddEntry(true);
   }
 
+  function handleResetForm() {
+    setFormData(blankSubscription);
+  }
+
   function handleToggleInput(index) {
     setisAddEntry(!isAddEntry);
   }
@@ -62,10 +68,11 @@ export default function DashboardPage() {
   return (
     <>
       <SubscriptionSummary />
-      <SubscriptionsDisplay handleShowInput={isAddEntry? () => {} : handleToggleInput}/>
+      <SubscriptionsDisplay handleEditSubscription={handleEditSubscription} handleShowInput={isAddEntry? () => {} : handleToggleInput}/>
       {isAddEntry && (
-        <SubscriptionForm onSubmit={() => {}} 
-        closeInput={handleToggleInput} formData={formData} handleChangeInput={handleChangeInput}/>
+        <SubscriptionForm handleResetForm={handleResetForm}
+        closeInput={handleToggleInput} formData={formData} 
+        handleChangeInput={handleChangeInput}/>
       )}
     </>
   );
