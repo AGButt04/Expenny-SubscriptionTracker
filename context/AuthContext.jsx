@@ -17,7 +17,7 @@ export function AuthProvider(props) {
 
     const [currentUser, setCurrentUser] = useState(null);
     const [userData, setUserData] = useState();
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
 
     function signup(email, password) {
         return createUserWithEmailAndPassword(auth, email, password);
@@ -54,10 +54,10 @@ export function AuthProvider(props) {
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, async user => {
             try {
-                setLoading(true);
                 setCurrentUser(user);
 
                 if (!user) return {}
+                setLoading(true);
 
                 // We found a user and check the database
                 const docRef = doc(db, 'users', user.uid);

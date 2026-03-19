@@ -38,7 +38,7 @@ export default function DashboardPage() {
   }
 
   function handleEditSubscription(index) {
-    const inputObj = userData.subscrioptions.find((val, valIndex) => {
+    const inputObj = userData.subscriptions.find((val, valIndex) => {
       return valIndex === index;
     });
 

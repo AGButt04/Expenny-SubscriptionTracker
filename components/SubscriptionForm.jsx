@@ -4,7 +4,7 @@ import { useState } from "react"
 
 export default function SubscriptionForm(props) {
     const { onSubmit, closeInput, formData, handleChangeInput, handleResetForm } = props;
-    const [handleAddSubscription] = useAuth();
+    const { handleAddSubscription } = useAuth();
 
     function handleFormSubmit(event) {
         // Prevents the random s behavious of reloading the webpage
