@@ -80,7 +80,8 @@ export function AuthProvider(props) {
 
                 console.log('Fetching user data..');
 
-                let firebaseData = { subscriptions } // Default data
+                // let firebaseData = { subscriptions } // Default data
+                let firebaseData = { subscriptions: []};
                 if (docSnap.exists()) {
                     // Found data
                     firebaseData = docSnap.data();
