@@ -3,7 +3,7 @@
 import { auth, db } from "@/firebase";
 import { subscriptions } from "@/utils";
 import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import { createContext, useContext, useState, useEffect } from "react";
 
 const AuthContext = createContext();
@@ -33,13 +33,27 @@ export function AuthProvider(props) {
         return signOut(auth);
     }
 
+    async function saveToFirebase(data) {
+        try {
+            const userRef = doc(db, 'users', currentUser.uid);
+            const res = await setDoc(userRef, {
+                subscriptions: data
+            }, { merge: true});
+        } catch (err) {
+            console.log(err.message);
+        }
+    } 
+
     async function handleAddSubscription(newSubscription) {
+        // Remove this line if you add paywall and making money.
+        if (userData.subscriptions.length > 30) { return; }
+
         // Modify the local state (global context)
         const newSubscriptions = [...userData.subscriptions, newSubscription];
         setUserData({subscriptions: newSubscriptions})
 
         // Write the changes to out firebase database (async)
-        
+        await saveToFirebase(newSubscriptions);
     }
 
     async function handleDeleteSubscription(index) {
@@ -49,6 +63,7 @@ export function AuthProvider(props) {
         })
 
         setUserData({subscriptions: newSubscriptions});
+        await saveToFirebase(newSubscriptions);
     }
 
     useEffect(() => {
